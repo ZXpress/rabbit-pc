@@ -2,11 +2,12 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+    username: 'zs'
   },
-  mutations: {
+  getters: {
+    // vuex的计算属性
   },
-  actions: {
-  },
-  modules: {
-  }
+  mutations: {},
+  actions: {},
+  modules: {}
 })
