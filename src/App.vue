@@ -1,9 +1,5 @@
 <template>
-  <div>222</div>
+  <!-- 一级路由 -->
+  <!-- <RouterView /> -->
+  <router-view />
 </template>
-
-<script>
-export default {
-  name: 'App'
-}
-</script>
