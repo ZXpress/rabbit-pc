@@ -4,6 +4,8 @@
     <AppNavbar />
     <!-- 头部组件 -->
     <AppHeader />
+    <!-- 吸顶组件 -->
+    <AppHeaderSticky />
     <div class="app-body">
       <!-- 二级路由 -->
       <!-- <RouterView /> -->
@@ -18,12 +20,20 @@
 import AppNavbar from '@/components/app-navbar'
 import AppHeader from '@/components/app-header'
 import AppFooter from '@/components/app-footer'
+import AppHeaderSticky from '@/components/app-header-sticky'
+import { useStore } from 'vuex'
 export default {
   name: 'Layout',
   components: {
     AppNavbar,
     AppHeader,
-    AppFooter
+    AppFooter,
+    AppHeaderSticky
+  },
+  // 获取分类数据
+  setup () {
+    const store = useStore()
+    store.dispatch('category/getList')
   }
 }
 </script>

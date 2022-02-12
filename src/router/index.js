@@ -8,7 +8,11 @@ const routes = [
   {
     path: '/',
     component: Layout,
-    children: [{ path: '/', component: Home }]
+    children: [
+      { path: '/', component: Home },
+      { path: '/category/:id', component: import('@/views/category/index') },
+      { path: '/category/sub/:id', component: import('@/views/category/sub') }
+    ]
   }
 ]
 
