@@ -14,3 +14,12 @@ export const findAllCateGory = () => {
 export const findTopCategory = (id) => {
   return request('/category', 'get', { id })
 }
+
+/**
+ * 获取二级类目id
+ * @param {String} id
+ * @returns
+ */
+export const findSubCategoryFilter = (id) => {
+  return request('/category/sub/filter', 'get', { id })
+}

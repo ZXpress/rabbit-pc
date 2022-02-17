@@ -4,7 +4,11 @@
       <!-- 面包屑 -->
       <XtxBread>
         <XtxBreadItem to="/">首页</XtxBreadItem>
-        <XtxBreadItem>{{ TopCategory.name }}</XtxBreadItem>
+        <transition name="fade-right" mode="out-in">
+          <XtxBreadItem :key="TopCategory.id">{{
+            TopCategory.name
+          }}</XtxBreadItem>
+        </transition>
       </XtxBread>
       <!-- 轮播图 -->
       <XtxCarousel :sliders="sliders" style="height: 500px" />
@@ -80,7 +84,10 @@ export default {
     watch(
       () => route.params.id,
       (newVal) => {
-        newVal && getSubList()
+        // newVal && getSubList(); 加上一个严谨判断，只有在顶级类目下有id才请求
+        if (newVal && `/category/${newVal}` === route.path) {
+          getSubList()
+        }
       },
       {
         immediate: true
@@ -92,6 +99,24 @@ export default {
 }
 </script>
 <style scoped lang="less">
+// // 面包屑动画
+// // 进入：右侧20px的位移，透明度为0
+// // 过度：0.5s
+// .fade-right-enter-from,
+// .fade-right-leave-to {
+//   transform: translateX(20px);
+//   opacity: 0;
+// }
+// .fade-right-enter-active,
+// .fade-right-leave-active {
+//   transition: all 0.5s;
+// }
+// .fade-right-enter-to,
+// .fade-right-leave-from {
+//   transform: none;
+//   opacity: 1;
+// }
+
 .top-category {
   h3 {
     font-size: 28px;
