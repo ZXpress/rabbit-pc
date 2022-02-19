@@ -20,6 +20,7 @@ export default {
         dymanicItems.push(h('i', { class: 'iconfont icon-angle-right' }))
       }
     })
+    // h第一个参数标签名  第二个参数标签的属性对象  第三个参数子节点
     return h('div', { class: 'xtx-bread' }, dymanicItems)
   }
 }
