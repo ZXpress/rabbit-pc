@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 const Layout = () => import('@/views/Layout')
 const Home = () => import('@/views/home')
+const Goods = () => import('@/views/goods/index')
 
 const routes = [
   // 一级路由
@@ -11,7 +12,8 @@ const routes = [
     children: [
       { path: '/', component: Home },
       { path: '/category/:id', component: import('@/views/category/index') },
-      { path: '/category/sub/:id', component: import('@/views/category/sub') }
+      { path: '/category/sub/:id', component: import('@/views/category/sub') },
+      { path: '/product/:id', component: Goods }
     ]
   }
 ]
