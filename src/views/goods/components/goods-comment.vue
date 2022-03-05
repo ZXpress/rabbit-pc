@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <div class="sort">
+    <div class="sort" v-if="commentInfo">
       <span>排序：</span>
       <a
         @click="changeSort(null)"
@@ -70,10 +70,10 @@
           </div>
           <div class="text">{{ item.content }}</div>
           <!-- 评论图片组件 -->
-          <!-- <GoodsCommentImage
+          <GoodsCommentImage
             v-if="item.pictures.length"
             :pictures="item.pictures"
-          /> -->
+          />
           <div class="time">
             <span>{{ item.createTime }}</span>
             <span class="zan"
@@ -83,13 +83,25 @@
         </div>
       </div>
     </div>
+    <!-- 分页组件 -->
+    <xtx-pagination
+      v-if="total"
+      @current-change="changePagerFn"
+      :total="total"
+      :page-size="reqParams.pageSize"
+      :current-page="reqParams.page"
+    />
   </div>
 </template>
 <script>
 import { findGoodsCommentInfo, findGoodsCommentList } from '@/api/product'
 import { inject, reactive, ref, watch } from 'vue'
+import GoodsCommentImage from './goods-comment-image.vue'
 export default {
   name: 'GoodsComment',
+  components: {
+    GoodsCommentImage
+  },
   setup () {
     // 评价信息
     const commentInfo = ref(null)
@@ -153,11 +165,13 @@ export default {
 
     // 初始化发送请求，筛选条件变化发送求情
     const commentList = ref([])
+    const total = ref(0)
     watch(
       reqParams,
       () => {
         findGoodsCommentList(goods.value.id, reqParams).then((data) => {
           commentList.value = data.result.items
+          total.value = data.result.counts
         })
       },
       { immediate: true }
@@ -179,6 +193,11 @@ export default {
       return nickname.substr(0, 1) + '****' + nickname.substr(-1)
     }
 
+    // 实现分页切换
+    const changePagerFn = (newPage) => {
+      reqParams.page = newPage
+    }
+
     return {
       commentInfo,
       currentTagIndex,
@@ -187,7 +206,9 @@ export default {
       commentList,
       changeSort,
       formatSpecs,
-      formatNickname
+      formatNickname,
+      total,
+      changePagerFn
     }
   }
 }
