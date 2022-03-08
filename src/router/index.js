@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 const Layout = () => import('@/views/Layout')
+const Login = () => import('@/views/login/index')
 const Home = () => import('@/views/home')
 const Goods = () => import('@/views/goods/index')
 
@@ -15,7 +16,8 @@ const routes = [
       { path: '/category/sub/:id', component: import('@/views/category/sub') },
       { path: '/product/:id', component: Goods }
     ]
-  }
+  },
+  { path: '/Login', component: Login }
 ]
 
 // vue2.0 new VueRouter({}) 创建路由实例
